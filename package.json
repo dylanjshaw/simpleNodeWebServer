@@ -1,0 +1,26 @@
+{
+  "name": "node-test-app",
+  "version": "1.0.0",
+  "description": "NodeJS test app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dylanjshaw/simpleNodeWebServer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dylanjshaw/simpleNodeWebServer/issues"
+  },
+  "homepage": "https://github.com/dylanjshaw/simpleNodeWebServer#readme",
+  "dependencies": {
+    "express": "^4.15.2",
+    "moment": "^2.18.1"
+  },
+  "devDependencies": {
+    "jasmine-node": "^1.14.5"
+  }
+}

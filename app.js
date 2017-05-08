@@ -1,5 +1,9 @@
+// var moment = require('moment');
+// console.log(moment().format('ddd, hA'));
+
 var http = require('http');
 var fs = require('fs');
+var express = require('express')
 
 http.createServer(function(req, res){
   switch (req.url){
@@ -7,7 +11,7 @@ http.createServer(function(req, res){
       fs.createReadStream(__dirname + '/index.htm').pipe(res);
       break;
     }
-    case '/api': {
+    case '/json': {
       res.writeHead(200, { 'Content-Type':'application/json'});
       var data = {
         firstname: 'Dylan',
