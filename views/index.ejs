@@ -2,10 +2,20 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link href=assets/style.css type=text/css rel=stylesheet />
-    <title>Hello World</title>
+    <link href=/assets/style.css type=text/css rel=stylesheet />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src=assets/jquery.js></script>
+    <!-- src might have to be different -->
+    <title>Home Landing</title>
   </head>
   <body>
     <h1>Hello World!!!</h1>
+    <form id='person-form' action="/personjson" method="post">
+      <label for="firstname">First Name:</label>
+      <input type="text" name="firstname"><br>
+      <label for="lastname">Last Name:</label>
+      <input type="text" name="lastname"><br>
+      <input type="submit" value="Submit">
+    </form>
   </body>
 </html>

@@ -5,8 +5,12 @@
 
 var express = require('express');
 var app = express();
-var port = process.env.PORT || 3000;
 var morgan = require('morgan')
+var bodyParser = require('body-parser');
+
+var port = process.env.PORT || 3000;
+var urlEncodedParser = bodyParser.urlencoded({extended: false});
+var jsonParser = bodyParser.json();
 
 app.use('/assets', express.static(__dirname + '/public'));
 //this is middleware, fetching the stylesheet
@@ -20,18 +24,29 @@ app.use(morgan('dev'));
 //request logger
 
 app.set('view engine', 'ejs');
-//looks inside view foler for static views
-
-//all of the below GET requests are also middleware because they happen
+//looks inside view folder for static views
+//-----------------------------------------------------------------------------
+//ALL of the below GET requests are also middleware because they happen
   //between the reqest and the response
-
+//-----------------------------------------------------------------------------
 app.get('/', function(req, res){
   res.render('index');
 });
 
 app.get('/person/:name', function(req, res){
-  res.send(`<html><head></head><body><h1> What up, ${req.params.name}! </h1></body></html>`)
+  res.render('person', {name: req.params.name});
 });
+
+app.post('/person', urlEncodedParser, function(req, res){
+  res.send('Thank you!')
+  console.log(req.body);
+});
+
+app.post('/personjson', jsonParser, function(req, res){
+  res.send("Thank you for the JSON data.")
+  console.log(req.body.firstname);
+  console.log(req.body.lastname);
+})
 
 app.get('/api', function(req, res){
   var obj = {key:'value'}
@@ -39,7 +54,9 @@ app.get('/api', function(req, res){
 })
 
 app.listen(port);
-
+//-----------------------------------------------------------------------------
+//BELOW is the manually generated server we used before expressJS
+//-----------------------------------------------------------------------------
 // http.createServer(function(req, res){
 //   switch (req.url){
 //     case '/': {
