@@ -6,12 +6,27 @@
 var express = require('express');
 var app = express();
 var port = process.env.PORT || 3000;
+var morgan = require('morgan')
 
 app.use('/assets', express.static(__dirname + '/public'));
 //this is middleware, fetching the stylesheet
 
+app.use('/', function(req, res, next){
+  console.log('hello hi');
+  next();
+});
+
+app.use(morgan('dev'));
+//request logger
+
+app.set('view engine', 'ejs');
+//looks inside view foler for static views
+
+//all of the below GET requests are also middleware because they happen
+  //between the reqest and the response
+
 app.get('/', function(req, res){
-  res.send('<html><head><link href=assets/style.css type=text/css rel=stylesheet /></head><body><h1>Hello World!</h1></body></html>')
+  res.render('index');
 });
 
 app.get('/person/:name', function(req, res){
