@@ -5,4 +5,4 @@ var usersSchema = new Schema({
   name: String
 });
 
-mongoose.model('users', {name: String});
+mongoose.model('users', usersSchema);

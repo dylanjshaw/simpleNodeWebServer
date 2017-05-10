@@ -5,16 +5,16 @@
 
 var express = require('express');
 var app = express();
+  app.set('view engine', 'ejs');
 var morgan = require('morgan');
   app.use(morgan('dev'));
   //request logger
 var apiController = require('./controllers/apiController');
 var htmlController = require('./controllers/htmlController');
 var mongoose = require('mongoose');
+  mongoose.connect('mongodb://127.0.0.1/my_database');
 //-----------------------------------------------------------------------------
-mongoose.connect('mongodb://127.0.0.1/my_database');
 var port = process.env.PORT || 3000;
-app.set('view engine', 'ejs');
 //-----------------------------------------------------------------------------
 
 app.use('/assets', express.static(__dirname + '/public'));

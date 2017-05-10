@@ -9,4 +9,4 @@ var postsSchema = new Schema({
   }
 });
 
-mongoose.model('posts', {content: String})
+mongoose.model('posts', postsSchema)
