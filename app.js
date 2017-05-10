@@ -5,53 +5,31 @@
 
 var express = require('express');
 var app = express();
-var morgan = require('morgan')
-var bodyParser = require('body-parser');
-
+var morgan = require('morgan');
+  app.use(morgan('dev'));
+  //request logger
+var apiController = require('./controllers/apiController');
+var htmlController = require('./controllers/htmlController');
+var mongoose = require('mongoose');
+//-----------------------------------------------------------------------------
+mongoose.connect('mongodb://127.0.0.1/my_database');
 var port = process.env.PORT || 3000;
-var urlEncodedParser = bodyParser.urlencoded({extended: false});
-var jsonParser = bodyParser.json();
+app.set('view engine', 'ejs');
+//-----------------------------------------------------------------------------
 
 app.use('/assets', express.static(__dirname + '/public'));
 //this is middleware, fetching the stylesheet
 
 app.use('/', function(req, res, next){
-  console.log('hello hi');
   next();
 });
 
-app.use(morgan('dev'));
-//request logger
-
-app.set('view engine', 'ejs');
-//looks inside view folder for static views
 //-----------------------------------------------------------------------------
 //ALL of the below GET requests are also middleware because they happen
   //between the reqest and the response
 //-----------------------------------------------------------------------------
-app.get('/', function(req, res){
-  res.render('index');
-});
-
-app.get('/person/:name', function(req, res){
-  res.render('person', {name: req.params.name});
-});
-
-app.post('/person', urlEncodedParser, function(req, res){
-  res.send('Thank you!')
-  console.log(req.body);
-});
-
-app.post('/personjson', jsonParser, function(req, res){
-  res.send("Thank you for the JSON data.")
-  console.log(req.body.firstname);
-  console.log(req.body.lastname);
-})
-
-app.get('/api', function(req, res){
-  var obj = {key:'value'}
-  res.json(obj);
-})
+htmlController(app);
+apiController(app);
 
 app.listen(port);
 //-----------------------------------------------------------------------------

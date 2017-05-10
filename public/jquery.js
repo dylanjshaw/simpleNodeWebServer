@@ -5,7 +5,7 @@ $(document).ready(function(){
     console.log(formData)
     $.ajax({
       method: 'POST',
-      url: '/personjson',
+      url: '/api/person',
       data: JSON.stringify(formData),
       dataType: 'json',
       contentType: 'application/json'
