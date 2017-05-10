@@ -18,6 +18,12 @@ module.exports = function(app){
     })
   });
 
+  app.get('/dbcperson/:name', function(req, res){
+    mongoose.model('users').find({name: req.params.name}, function(err, users){
+      res.send(users);
+    })
+  });
+
   // app.post('/person', urlEncodedParser, function(req, res){
   //   res.send('Thank you!')
   //   console.log(req.body);
